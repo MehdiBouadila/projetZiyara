@@ -1,0 +1,120 @@
+{% extends 'back.html.twig' %}
+
+{% block js %}
+ {{ parent() }} 
+{% endblock %}
+{% block css %}
+    {{ parent() }}
+    <style>
+    body  {
+            
+             font-size: 16px;
+              color: #333;
+            text-align:center;
+            align-items:center;
+            margin: 0 auto; /* Center the form control horizontally */
+    
+      
+            }
+        .container { margin-bottom: 64px;align-items:center; }
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f8f9fa; /* Light gray background */
+            border-collapse: collapse;
+            width: 70%; /* Adjust width as needed */
+            margin: 20px auto; /* Center the table horizontally */
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Light gray border bottom */
+        }
+        th {
+            background-color: #343A40; /* Dark gray background for header cells */
+            color: #fff; /* White text color for header cells */
+        }
+        td {
+            background-color: #fff; /* White background for data cells */
+        }
+        a {
+            text-decoration: none;
+            color: #007bff; /* Blue link color */
+            margin-right: 10px;
+            transition: color 0.3s ease; /* Smooth color transition on hover */
+        }
+        a:hover {
+            color: #0056b3; /* Darker blue color on hover */
+        }
+        .delete-form {
+            display: inline-block;
+            margin-left: 10px;
+        }
+         .form-btn {
+            background-color: #4B49AC;
+            color: white;
+            padding: 14px 0px;
+            margin: 16px auto;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 18%;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-btn:hover {
+            background-color: #2c5f78;
+        }
+    </style>
+{% endblock %}
+
+
+{% block title %}Visite{% endblock %}
+
+{% block body %}
+ {{ parent() }} 
+    <h1>Visite</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ visite.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ visite.titre }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionVisite</th>
+                <td>{{ visite.descriptionVisite }}</td>
+            </tr>
+            <tr>
+                <th>DateVisite</th>
+                <td>{{ visite.dateVisite ? visite.dateVisite|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ visite.prix }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>
+                 {% if visite.imagev %}
+                        <img src="{{ asset('uploads/' ~ visite.imagev) }}" alt="imagev">
+                    {% else %}
+                        No image available
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center mt-5 create-btn">
+            <a href="{{ path('app_visite_index') }}" class="btn btn-primary btn-lg">Back to List</a>
+        </div>
+<div class="form-btn">
+    <a href="{{ path('app_visite_edit', {'id': visite.id}) }}" class="btn btn-primary btn-lg">edit</a>
+</div>
+    {{ include('/back/visite/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,167 @@
+{% extends 'back.html.twig' %}
+
+{% block js %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select the input field for prix
+            const prixInput = document.getElementById('visite_prix');
+
+            // Add event listener for input change
+            prixInput.addEventListener('input', function(event) {
+                // Convert the input value to a number
+                const value = parseInt(event.target.value);
+
+                // Check if the value is negative
+                if (value < 0) {
+                    // If negative, set the value to 0
+                    event.target.value = 0;
+                }
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    <style>
+        .container { margin-bottom: 64px; }
+        .table {
+            border-radius: 10px;
+            overflow: hidden;
+            background-color:#000;
+        }
+
+        body  {
+            
+             font-size: 16px;
+              color: #333;
+            text-align:center;
+            align-items:center;
+            margin: 0 auto; /* Center the form control horizontally */
+    
+      
+            }
+
+
+
+         /* CSS for Symfony form validation error messages */
+body ul {
+    /* Styles for the <ul> element wrapping the error messages */
+    list-style-type: none; /* Remove default list style */
+    padding: 0; /* Remove default padding */
+}
+
+body li {
+    /* Styles for individual error messages (<li> elements) */
+    color: red; /* Set text color to red */
+    font-size: 14px; /* Set font size */
+    margin-bottom: 5px; /* Add some spacing between error messages */
+}
+
+  .form-label ,.date-labe, {
+    margin: 20px auto;
+    font-size: 24px; /* Adjust font size as needed */
+    color: #fff; /* Adjust text color as needed */
+    background-color: #3D7593; /* Adjust background color as needed */
+    border: 2px solid #3D7593; /* Adjust border color as needed */
+    border-radius: 12px; /* Adjust border radius to control the roundness of the outline */
+    padding: 5px 10px; /* Adjust padding as needed for spacing */
+    display: inline-block; /* Ensures the label takes up only the necessary width */
+}
+
+      
+       
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        /* Apply animation to table rows */
+        tbody tr {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        /* Keyframe animation for button */
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        /* Apply animation to button */
+        .create-btn {
+            animation: slideIn 0.5s ease-in-out;
+        }
+        
+        /* Style input fields */
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            border-color: #3D7593;
+        }
+
+        /* Style form button */
+        .form-btn {
+            background-color:   #4B49AC;
+            color: white;
+            padding: 14px 0px;
+            margin: 16px 0;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 18%;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-btn:hover {
+            background-color: #2c5f78;
+        }
+
+        /* Style titles */
+        .title {
+            font-size: 2rem;
+            color: #3D7593;
+            margin-bottom: 20px;
+        }
+    
+    </style>
+{% endblock %}
+
+{% block title %}
+    New Visite
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <div class="container">
+        <h1 class="display-4 text-center mb-5">Create new Visite</h1>
+
+        {{ include('/back/visite/_form.html.twig') }}
+
+        <div class="text-center mt-5 create-btn">
+            <a href="{{ path('app_visite_index') }}" class="btn btn-primary btn-lg">Back to List</a>
+        </div>
+    </div>
+{% endblock %}

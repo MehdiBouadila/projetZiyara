@@ -1835,7 +1835,8 @@ select.form-control:focus::-ms-value {
   padding-bottom: calc(0.375rem + 1px);
   margin-bottom: 0;
   font-size: inherit;
-  line-height: 1.5; }
+  line-height: 1.5; 
+}
 
 .col-form-label-lg {
   padding-top: calc(0.5rem + 1px);
@@ -1889,7 +1890,8 @@ textarea.form-control {
 
 .form-text {
   display: block;
-  margin-top: 0.25rem; }
+  margin-top: 0.25rem; 
+}
 
 .form-row {
   display: -webkit-box;
@@ -2113,7 +2115,8 @@ textarea.form-control {
   flex-flow: row wrap;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center; }
+  align-items: center; 
+}
   .form-inline .form-check {
     width: 100%; }
   @media (min-width: 576px) {

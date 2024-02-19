@@ -1,3 +1,7 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+get_image:
+    path: '/get-image/{id}'
+    controller: App\Controller\VisiteController::getImage
