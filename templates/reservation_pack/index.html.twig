@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReservationPack index
+{% endblock %}
+
+{% block body %}
+	<h1>ReservationPack index</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Titre pack</th>
+				<th>DateReservationPack</th>
+				<th>NbrParticipantPack</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for reservation_pack in reservation_packs %}
+				<tr>
+					<td>{{ reservation_pack.pack.titrePack }}</td>
+					<td>{{ reservation_pack.dateReservationPack ? reservation_pack.dateReservationPack|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ reservation_pack.nbrParticipantPack }}</td>
+					<td>
+						<a href="{{ path('app_reservation_pack_show', {'id': reservation_pack.id}) }}">show</a>
+						<a href="{{ path('app_reservation_pack_edit', {'id': reservation_pack.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_reservation_pack_new') }}">Create new</a>
+{% endblock %}

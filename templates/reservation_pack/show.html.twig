@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ReservationPack{% endblock %}
+
+{% block body %}
+    <h1>ReservationPack</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation_pack.id }}</td>
+            </tr>
+            <tr>
+                <th>DateReservationPack</th>
+                <td>{{ reservation_pack.dateReservationPack ? reservation_pack.dateReservationPack|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NbrParticipantPack</th>
+                <td>{{ reservation_pack.nbrParticipantPack }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_pack_index') }}">back to list</a>
+
+    <a href="{{ path('app_reservation_pack_edit', {'id': reservation_pack.id}) }}">edit</a>
+
+    {{ include('reservation_pack/_delete_form.html.twig') }}
+{% endblock %}

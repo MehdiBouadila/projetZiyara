@@ -1,0 +1,60 @@
+{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+<div class="form-row">
+	<div class="form-group col-md-6">
+		{{ form_label(form.titrePack) }}
+		{{ form_widget(form.titrePack, {'attr': {'class': 'form-control', 'placeholder': 'Title'}}) }}
+		{{ form_errors(form.titrePack) }}
+		{# Display validation errors for title #}
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_label(form.descriptionPack) }}
+		{{ form_widget(form.descriptionPack, {'attr': {'class': 'form-control', 'placeholder': 'Description'}}) }}
+		{{ form_errors(form.descriptionPack) }}
+		{# Display validation errors for description #}
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		{{ form_label(form.prixPack) }}
+		{{ form_widget(form.prixPack, {'attr': {'class': 'form-control', 'placeholder': 'Price'}}) }}
+		{{ form_errors(form.prixPack,{'attr':{'class':'text-danger'}}) }}
+		{# Display validation errors for price #}
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_label(form.imagePack) }}
+		{{ form_widget(form.imagePack, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.imagePack,{'attr':{'class':'text-danger'}}) }}
+		{# Display validation errors for image #}
+	</div>
+</div>
+<div class="form-row">
+	<div class="form-group col-md-6">
+		{{ form_label(form.dateDepartPack) }}
+		{{ form_widget(form.dateDepartPack, {'attr': {'class': 'form-control', 'placeholder': 'Departure Date'}}) }}
+		{{ form_errors(form.dateDepartPack,{'attr':{'class':'text-danger'}}) }}
+		{# Display validation errors for departure date #}
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_label(form.dateArrivePack) }}
+		{{ form_widget(form.dateArrivePack, {'attr': {'class': 'form-control', 'placeholder': 'Arrival Date'}}) }}
+		{{ form_errors(form.dateArrivePack) }}
+		{# Display validation errors for arrival date #}
+	</div>
+</div>
+
+<div class="form-row">
+	<div class="form-group col-md-6">
+		{{ form_label(form.transports) }}
+		{{ form_widget(form.transports, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.transports) }}
+		{# Display validation errors for transports #}
+	</div>
+	<div class="form-group col-md-6">
+		{{ form_label(form.guide) }}
+		{{ form_widget(form.guide, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(form.guide) }}
+		{# Display validation errors for guide #}
+	</div>
+</div>
+<button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

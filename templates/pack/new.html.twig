@@ -1,0 +1,21 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}New Pack
+{% endblock %}
+
+{% block body %}
+	<h1>Create new Pack</h1>
+
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">{{ message }}</div>
+	{% endfor %}
+
+	{% for message in app.flashes('danger') %}
+		<div class="alert alert-danger">{{ message }}</div>
+	{% endfor %}
+
+	{{ include('pack/_form.html.twig') }}
+
+	<a href="{{ path('app_pack_index') }}">Back to list</a>
+
+</script>{% endblock %}

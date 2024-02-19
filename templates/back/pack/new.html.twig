@@ -1,0 +1,16 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}New Pack{% endblock %}
+
+{% block css %}
+ {{ parent() }} 
+{% endblock %}
+
+{% block body %}
+ {{ parent() }} 
+    <h1>Create new Pack</h1>
+
+    {{ include('back/pack/_form.html.twig') }}
+
+    <a href="{{ path('app_pack_index') }}">back to list</a>
+{% endblock %}

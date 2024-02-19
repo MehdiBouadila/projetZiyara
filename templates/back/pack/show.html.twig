@@ -1,0 +1,52 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Pack{% endblock %}
+
+{% block css %}
+ {{ parent() }} 
+{% endblock %}
+
+{% block body %}
+ {{ parent() }} 
+
+    <h1>Pack</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ pack.id }}</td>
+            </tr>
+            <tr>
+                <th>TitrePack</th>
+                <td>{{ pack.titrePack }}</td>
+            </tr>
+            <tr>
+                <th>DescriptionPack</th>
+                <td>{{ pack.descriptionPack }}</td>
+            </tr>
+            <tr>
+                <th>PrixPack</th>
+                <td>{{ pack.prixPack }}</td>
+            </tr>
+            <tr>
+                <th>ImagePack</th>
+                <td>{{ pack.imagePack }}</td>
+            </tr>
+            <tr>
+                <th>DateDepartPack</th>
+                <td>{{ pack.dateDepartPack ? pack.dateDepartPack|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateArrivePack</th>
+                <td>{{ pack.dateArrivePack ? pack.dateArrivePack|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_pack_index') }}">back to list</a>
+
+    <a href="{{ path('app_pack_edit', {'id': pack.id}) }}">edit</a>
+
+    {{ include('back/pack/_delete_form.html.twig') }}
+{% endblock %}

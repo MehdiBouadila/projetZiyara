@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ReservationPack
+{% endblock %}
+
+{% block body %}
+	<h1>Create new ReservationPack</h1>
+
+	{{ include('reservation_pack/_form.html.twig') }}
+
+	<a href="{{ path('app_reservation_pack_index') }}">back to list</a>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<script>
+		$(document).ready(function () {
+$('.datepicker').datepicker({dateFormat: 'yy/mm/dd'});
+});
+	</script>
+{% endblock %}

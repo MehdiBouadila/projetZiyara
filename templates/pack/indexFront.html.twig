@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pack index
+{% endblock %}
+
+{% block body %}
+	<h1>Pack index</h1>
+
+	<div class="row">
+		{% for pack in packs %}
+			<div class="col-md-4 mb-4">
+				<div class="card">
+					<img src="{{ asset('img/' ~ pack.imagePack) }}" class="card-img-top" alt="{{ pack.titrePack }}">
+					<div class="card-body">
+						<h5 class="card-title">{{ pack.titrePack }}</h5>
+						<p class="card-text">Description :{{ pack.descriptionPack }}</p>
+						<p class="card-text">Price:
+							{{ pack.prixPack }}
+							TND</p>
+						<p class="card-text">Departure Date:
+							{{ pack.dateDepartPack ? pack.dateDepartPack|date('Y-m-d') : '' }}</p>
+						<p class="card-text">Arrival Date:
+							{{ pack.dateArrivePack ? pack.dateArrivePack|date('Y-m-d') : '' }}</p>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<div class="col">
+				<p>No records found</p>
+			</div>
+		{% endfor %}
+	</div>
+
+	<a href="{{ path('app_reservation_pack_new') }}" class="btn btn-success">Reserver</a>
+{% endblock %}

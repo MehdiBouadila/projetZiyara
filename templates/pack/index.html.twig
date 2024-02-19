@@ -1,0 +1,43 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Pack index
+{% endblock %}
+
+{% block body %}
+	<h1>Pack index</h1>
+	{% for message in app.flashes('danger') %}
+		<div class="alert alert-danger">{{ message }}</div>
+	{% endfor %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">{{ message }}</div>
+	{% endfor %}
+
+	<div class="row">
+		{% for pack in packs %}
+			<div class="col-md-4 mb-4">
+				<div class="card">
+					<img src="{{ asset('img/' ~ pack.imagePack) }}" class="card-img-top" alt="{{ pack.titrePack }}">
+					<div class="card-body">
+						<h5 class="card-title">{{ pack.titrePack }}</h5>
+						<p class="card-text">Description :{{ pack.descriptionPack }}</p>
+						<p class="card-text">Price:
+							{{ pack.prixPack }}
+							TND</p>
+						<p class="card-text">Departure Date:
+							{{ pack.dateDepartPack ? pack.dateDepartPack|date('Y-m-d') : '' }}</p>
+						<p class="card-text">Arrival Date:
+							{{ pack.dateArrivePack ? pack.dateArrivePack|date('Y-m-d') : '' }}</p>
+						<a href="{{ path('app_pack_show', {'id': pack.id}) }}" class="btn btn-primary">Show</a>
+						<a href="{{ path('app_pack_edit', {'id': pack.id}) }}" class="btn btn-secondary">Edit</a>
+					</div>
+				</div>
+			</div>
+		{% else %}
+			<div class="col">
+				<p>No records found</p>
+			</div>
+		{% endfor %}
+	</div>
+
+	<a href="{{ path('app_pack_new') }}" class="btn btn-success">Create new</a>
+{% endblock %}
