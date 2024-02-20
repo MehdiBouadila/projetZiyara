@@ -6,8 +6,12 @@ use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
+use Symfony\Component\HttpFoundation\File\File;
+
+
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
 #[Broadcast]
+
 class Produit
 {
     #[ORM\Id]
@@ -27,13 +31,14 @@ class Produit
     #[ORM\Column(length: 255)]
     private ?int$prix = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?categorie $categorie = null;
+    #[ORM\Column(length: 255)]
+    private ?string $cat = null;
+
+    #[ORM\ManyToOne(inversedBy: 'tab')]
+    private ?Categorie $catt = null;
 
 
-
-
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -87,17 +92,28 @@ class Produit
         return $this;
     }
 
-    public function getCategorie(): ?categorie
+    public function getCat(): ?string
     {
-        return $this->categorie;
+        return $this->cat;
     }
 
-    public function setCategorie(?categorie $categorie): static
+    public function setCat(string $cat): static
     {
-        $this->categorie = $categorie;
+        $this->cat = $cat;
 
         return $this;
     }
 
+    public function getCatt(): ?Categorie
+    {
+        return $this->catt;
+    }
+
+    public function setCatt(?Categorie $catt): static
+    {
+        $this->catt = $catt;
+
+        return $this;
+    }
     
 }

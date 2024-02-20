@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategorieRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
@@ -21,6 +23,14 @@ class Categorie
     #[ORM\Column(length: 255)]
     private ?string $type = null;
 
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'catt')]
+    private Collection $tab;
+
+    public function __construct()
+    {
+        $this->tab = new ArrayCollection();
+    }
+   
     public function getId(): ?int
     {
         return $this->id;
@@ -49,4 +59,39 @@ class Categorie
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getTab(): Collection
+    {
+        return $this->tab;
+    }
+
+    public function addTab(Produit $tab): static
+    {
+        if (!$this->tab->contains($tab)) {
+            $this->tab->add($tab);
+            $tab->setCatt($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTab(Produit $tab): static
+    {
+        if ($this->tab->removeElement($tab)) {
+            // set the owning side to null (unless already changed)
+            if ($tab->getCatt() === $this) {
+                $tab->setCatt(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+  
+   
+   
 }

@@ -12,8 +12,9 @@
 {{ parent() }}
     <h1>Commande index</h1>
 
-    <table class="table">
-        <thead>
+    <div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="table-dark">
             <tr>
                 <th>Id</th>
                 <th>Date</th>
@@ -32,8 +33,8 @@
                 <td>{{ commande.total }}</td>
                 <td>{{ commande.typePaiement }}</td>
                 <td>
-                    <a href="{{ path('app_commande_show', {'id': commande.id}) }}">show</a>
-                    <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
+                    <a class="btn btn-inverse-warning btn-fw" href="{{ path('app_commande_show', {'id': commande.id}) }}">show<i class="mdi mdi-eye"></i> </a>
+                    <a class="btn btn-inverse-info btn-fw" href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit<i class="mdi mdi-border-color"></i> </a>
                 </td>
             </tr>
         {% else %}
@@ -43,6 +44,6 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_commande_new') }}">Create new</a>
+</div>
+    <a class="btn btn-inverse-success btn-fw" href="{{ path('app_commande_new') }}">Create new<i class="mdi mdi-plus-circle"></i></a>
 {% endblock %}

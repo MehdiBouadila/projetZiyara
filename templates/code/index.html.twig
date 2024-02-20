@@ -12,8 +12,9 @@
 {{ parent() }}
     <h1>Code index</h1>
 
-    <table class="table">
-        <thead>
+   <div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="table-dark">
             <tr>
                 <th>Id</th>
                 <th>Code</th>
@@ -32,8 +33,8 @@
                 <td>{{ code.dateDebut }}</td>
                 <td>{{ code.dateFin }}</td>
                 <td>
-                    <a href="{{ path('app_code_show', {'id': code.id}) }}">show</a>
-                    <a href="{{ path('app_code_edit', {'id': code.id}) }}">edit</a>
+                    <a class="btn btn-inverse-warning btn-fw" href="{{ path('app_code_show', {'id': code.id}) }}">show<i class="mdi mdi-eye"></i> </a>
+                    <a class="btn btn-inverse-info btn-fw" href="{{ path('app_code_edit', {'id': code.id}) }}">edit <i class="mdi mdi-border-color"></i> </a>
                 </td>
             </tr>
         {% else %}
@@ -43,6 +44,7 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
-    <a href="{{ path('app_code_new') }}">Create new</a>
+    <a class="btn btn-inverse-success btn-fw" href="{{ path('app_code_new') }}">Create new <i class="mdi mdi-plus-circle"></i></a>
 {% endblock %}

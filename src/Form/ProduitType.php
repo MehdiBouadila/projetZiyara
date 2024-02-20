@@ -7,6 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+
+
 
 class ProduitType extends AbstractType
 {
@@ -15,10 +18,12 @@ class ProduitType extends AbstractType
         $builder
             ->add('nom')
             ->add('image', FileType::class, [
-                'label' => 'Choisir un fichier',
-                'mapped' => false, // Pour ne pas mapper ce champ à une propriété de votre entité
-                'required' => true, // Pour rendre le champ obligatoire ou non selon vos besoins
+                'label' => 'Your Image (JPG, JPEG, PNG file)',
+                'mapped' => false, // tells Symfony not to try to map this field to any entity property
+                'required' => false, // allow the field to be empty, so you can remove the image
+                'attr' => ['accept' => 'image/*'],
             ])
+        
             ->add('quantite')
             ->add('prix')
         ;

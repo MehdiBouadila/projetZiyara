@@ -12,29 +12,41 @@
 {% block body %}
 {{ parent () }}
     <h1>Produit index</h1>
-
-    <table class="table">
-        <thead>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="table-dark">
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
                 <th>Image</th>
                 <th>Quantite</th>
                 <th>Prix</th>
-                <th>actions</th>
+                <th>Categorie</th>
+                <th>Delete</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for produit in produits %}
             <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.nom }}</td>
-                <td>{{ produit.image }}</td>
-                <td>{{ produit.quantite }}</td>
-                <td>{{ produit.prix }}</td>
-                <td>
-                    <a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
-                    <a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+                <td class="py-1">{{ produit.id }}</td>
+                <td class="py-1">{{ produit.nom }}</td>
+                <td><img src="{{ asset('uploads/' ~ produit.image) }}" alt="Uploaded Image" length="100" width="100"></td>
+                <td class="py-1">{{ produit.quantite }}</td>
+                <td class="py-1">{{ produit.prix }}</td>
+                <td class="py-1"></td>
+                <td class="py-1">{{ include('produit/_delete_form.html.twig') }}</td>
+                <td class="py-1">
+           
+                     
+                    <a type="button" class="btn btn-inverse-warning btn-fw" href="{{ path('app_produit_show', {'id': produit.id}) }}">show
+                    <i class="mdi mdi-eye"></i> 
+                    </a>
+                    
+                    <a type="button" class="btn btn-inverse-info btn-fw" href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit
+                    <i class="mdi mdi-border-color"></i> 
+                    </a>
+                   
                 </td>
             </tr>
         {% else %}
@@ -44,6 +56,9 @@
         {% endfor %}
         </tbody>
     </table>
+    </div>
 
-    <a href="{{ path('app_produit_new') }}">Create new</a>
+    <a type="button" class="btn btn-inverse-success btn-fw" href="{{ path('app_produit_new') }}">Create new
+    <i class="mdi mdi-plus-circle"></i> 
+    </a>
 {% endblock %}

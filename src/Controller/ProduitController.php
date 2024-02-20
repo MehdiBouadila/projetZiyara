@@ -7,9 +7,12 @@ use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/produit')]
 class ProduitController extends AbstractController
@@ -23,13 +26,36 @@ class ProduitController extends AbstractController
     }
 
     #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
     {
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+                $imageFile = $form->get('image')->getData();
+
+        if ($imageFile) {
+             $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+             $safeFilename = $slugger->slug($originalFilename);
+             $newFilename = $safeFilename . '-' . uniqid() . '.' . $imageFile->guessExtension();
+
+            // Move the file to the directory where your images are stored
+            try {
+                $imageFile->move($this->getParameter('img_directory'), // specify the directory where images should be stored
+                    $newFilename
+                );
+             } catch (FileException $e) {
+         // Handle the exception if something happens during the file upload
+            }
+
+     // Update the 'image' property to store the file name instead of its contents
+                $produit->setImage($newFilename);
+        }
+
+
+
             $entityManager->persist($produit);
             $entityManager->flush();
 
@@ -78,4 +104,5 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
+    
 }
