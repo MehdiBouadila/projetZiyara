@@ -1,0 +1,185 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Details Guide {% endblock %}
+
+{% block body %}
+<style>
+
+.person-details img {
+    max-width: 50%; /* Contrôle la taille de l'image */
+    height: auto; /* Maintient le ratio de l'image */
+    border-radius: 10px; /* Arrondit les coins de l'image */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet de profondeur */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transition douce pour l'effet au survol */
+    margin-bottom: 20px; /* Espacement entre l'image et le texte en dessous */
+    display: block; /* S'assure que l'image est centrée si elle est plus petite que la largeur maximale */
+    margin-left: auto; /* Centre l'image horizontalement */
+    margin-right: auto;
+}
+
+.person-details img:hover {
+    transform: scale(1.05); /* Agrandit légèrement l'image au survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Renforce l'ombre pour accentuer l'effet au survol */
+}
+
+.btContentWrap {
+    font-family: 'Arial', sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+}
+
+.bt_bb_section.btPageHeadline {
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    position: relative;
+    color: #fff;
+}
+
+/* Détails de la personne */
+.person-details {
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    max-width: 800px;
+    margin: -80px auto 30px;
+    position: relative;
+    z-index: 2;
+    transition: box-shadow 0.3s ease;
+}
+
+.person-details:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Titres et textes */
+.person-details h2 {
+    color: #0056b3;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.person-details p {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #555;
+}
+
+.person-details p strong {
+    color: #000;
+    font-weight: 500;
+}
+
+/* Bouton de retour */
+.btn-retour ,.btn-reserver {
+    display: inline-block;
+    background-color: orange;
+    color: #ffffff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-retour:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .bt_bb_section.btPageHeadline {
+        padding: 80px 0;
+    }
+
+    .person-details {
+        padding: 15px;
+        margin-top: -40px;
+    }
+
+    .person-details h2 {
+        font-size: 24px;
+    }
+
+    .btn-retour {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+  
+
+}
+
+
+</style>
+
+
+
+<div class="btContentWrap btClear">
+    <section class="bt_bb_section gutter bt_bb_vertical_align_top btPageHeadline bt_bb_background_image bt_bb_background_overlay_gradient bt_bb_parallax btDarkSkin" style="background-image:url({{ asset('guide/wp-content/uploads/sites/2/2018/09/bgn-heading-athens.jpg') }})" data-parallax="0.8" data-parallax-offset="0">
+        <div class="bt_bb_port port">
+            <div class="bt_bb_cell">
+                <div class="bt_bb_cell_inner">
+                    <div class="bt_bb_row">
+                        <div class="bt_bb_column bt_bb_align_center">
+                            <div class="bt_bb_column_content">
+                                <header class="bt_bb_headline bt_bb_superheadline bt_bb_superheadline_outside bt_bb_size_large" data-bt-override-class="{}">
+                                    <div class="bt_bb_headline_superheadline_outside">
+                                        <span class="bt_bb_headline_superheadline">
+                                            <span class="btBreadCrumbs">
+                                              
+                                            </span>
+                                        </span>
+                                    </div>
+                                    
+                                </header>
+                            </div><!-- /columnContent -->
+                        </div><!-- /column -->
+                    </div><!-- /row -->
+                </div><!-- /cellInner -->
+            </div><!-- /cell -->
+        </div><!-- /port -->
+    </section> 
+
+    <div class="person-details">
+        <h2>Détails du guide selectionne</h2>
+        <img src="{{ asset('images/' ~ guide.ImageGuide) }}" alt="Photo de Stephan Humbert">
+
+
+        <p><strong>Nom:</strong> {{ guide.NomGuide }}</p>
+        <p><strong>Prénom:</strong>  {{ guide.PrenomGuide }}</p>
+         <p><strong>Langue:</strong> {{ guide.Langue }} </p>
+        <p><strong>Disponibilite:</strong> {{ guide.Disponibilite }}</p>
+        <!-- Ajoutez plus de détails ici -->
+         <a href="{{ path('listeFront') }}" class="btn-retour">Retour aux listes des guides</a>
+          <a href="{{ path('app_reservation_new', {'guideId': guide.id}) }}" class="btn-retour btn-reserver">Réserver</a>
+
+         
+    </div>
+    <script src="{{ asset('js/script.js') }}"></script>
+
+    
+
+                                </div>
+                            </div><!-- /cellInner -->
+                        </div><!-- /cell -->
+                    </div><!-- /port -->
+                </section>
+            </div><!-- /bt_bb_wrapper -->
+        </div><!-- /content -->
+    </div><!-- /contentHolder -->
+</div><!-- /contentWrap -->
+
+
+
+
+{% endblock  %}

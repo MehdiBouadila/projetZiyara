@@ -1,0 +1,48 @@
+{# templates/guide/listGuide.html.twig #}
+
+{% extends 'back.html.twig' %}
+
+{% block title %}Liste des guides{% endblock %}
+
+{% block body %}
+
+
+    <h1>Liste des guides</h1>
+    <a href="{{ path('add_guide') }}" style="text-decoration: none;">
+        <button style="padding: 10px; background-color: green; color: white; border: none; cursor: pointer;">Ajouter une guide</button>
+    </a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID guide</th>
+                <th>Nom_Guide</th>
+                <th>Prenom_Guide</th>
+                <th>Langue</th>
+                <th>Disponibilite</th>
+                <th>Image_Guide</th>
+                <th>edit</th>
+                <th>delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for guide in guides %}
+                <tr>
+                    <td>{{ guide.id }}</td>
+                    <td>{{ guide.NomGuide }}</td>
+                    <td>{{ guide.PrenomGuide }}</td>
+                    <td>{{ guide.Langue }}</td>
+                    <td>{{ guide.Disponibilite }}</td>
+                    <td><img src="{{ asset('images/' ~ guide.ImageGuide) }}" alt="Guide Image" style="width: 200px; height: 200px;"></td>
+                    <td><a href="{{ path('edit_guide', {'id': guide.id}) }}">Edit</a></td>
+                    <td>
+                        <form method="post" action="{{ path('delete_guide', {'id': guide.id}) }}" style="display: inline;">
+                            <input type="hidden" name="_method" value="POST">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ guide.id) }}">
+                            <button type="submit" style="border: none; background: none; padding: 0; color: blue; text-decoration: underline; cursor: pointer;">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

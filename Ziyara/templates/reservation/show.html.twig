@@ -1,0 +1,103 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+
+
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5; /* Arrière-plan général légèrement gris */
+    color: #333; /* Couleur du texte principale */
+    line-height: 1.6;
+    padding: 20px;
+}
+
+h1 {
+    color: #4A00E0; /* Un violet profond pour les titres */
+}
+
+.table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table th, 
+.table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+}
+
+.table th {
+    background-color: #3A0CA3; /* Violet pour l'en-tête du tableau */
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.table tr:last-child td {
+    border-bottom: none;
+}
+
+
+
+a[href*='edit'] {
+    background-color: #7209B7; /* Un violet différent pour les actions d'édition */
+}
+
+a[href*='reservation_index'] {
+    background-color: #4361EE; /* Un bleu vif pour le lien 'back to list' */
+}
+
+/* Spécifique au formulaire de suppression */
+.delete-form {
+    display: inline;
+}
+
+.delete-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #9D4EDD; /* Violet pour le bouton de suppression */
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-form button:hover {
+    background-color: #6D28D9; /* Violet plus foncé au survol */
+}
+</style>
+
+
+    <h1>Reservation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ reservation.id }}</td>
+            </tr>
+            <tr>
+                <th>DateReservationGuide</th>
+                <td>{{ reservation.dateReservationGuide ? reservation.dateReservationGuide|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duree</th>
+                <td>{{ reservation.duree }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_index') }}">back to list</a>
+
+    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+
+    {{ include('reservation/_delete_form.html.twig') }}
+{% endblock %}

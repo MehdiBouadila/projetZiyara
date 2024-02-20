@@ -1,0 +1,153 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Reservation index{% endblock %}
+
+{% block body %}
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    .table thead tr {
+        background-color: #0056b3;
+        color: #ffffff;
+        text-align: left;
+    }
+
+    .table th, .table td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+
+    .table tbody tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+    .table tbody tr:hover {
+        background-color: #ddf4ff;
+    }
+
+    .table td a {
+        text-decoration: none;
+        color: #0056b3;
+        font-weight: 600;
+    }
+
+    .table td a:hover {
+        color: #d35400;
+    }
+
+    a[href*="app_reservation_new"] {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 15px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+    }
+
+    a[href*="app_reservation_new"]:hover {
+        background-color: #218838;
+    }
+
+    /* Responsive design adjustments */
+    @media (max-width: 768px) {
+        .table thead {
+            display: none;
+        }
+
+        .table, .table tbody, .table tr, .table td {
+            display: block;
+            width: 100%;
+        }
+
+        .table tr {
+            margin-bottom: 15px;
+        }
+
+        .table td {
+            text-align: right;
+            padding-left: 50%;
+            text-align: right;
+            position: relative;
+        }
+
+        .table td::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            width: 50%;
+            padding-left: 15px;
+            font-weight: bold;
+            text-align: left;
+        }
+    }
+    
+
+/* Style pour le bouton 'Create new' */
+.create-new-button {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #0056b3;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.create-new-button:hover {
+    background-color: #004494;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+
+    <h1>Reservation Des Guides</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateReservationGuide</th>
+                <th>Duree</th>
+                 <th>Guide</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.dateReservationGuide ? reservation.dateReservationGuide|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation.duree }}</td>
+                <td>{{ reservation.guide.NomGuide}}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
+                    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="create-new-button" href="{{ path('app_reservation_new') }}">Create new</a>
+{% endblock %}

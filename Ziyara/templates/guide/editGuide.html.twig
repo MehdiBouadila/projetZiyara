@@ -1,0 +1,30 @@
+{# templates/guide/editGuide.html.twig #}
+
+{% extends 'back.html.twig' %}
+
+{% block title %}Modifier une guide{% endblock %}
+
+{% block body %}
+    <h1>Modifier une guide</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.NomGuide) }}
+    {{ form_row(form.PrenomGuide) }}
+     {{ form_row(form.Langue) }}
+    
+    {{ form_row(form.Disponibilite) }}
+
+    {# Display the current image if it exists #}
+    {% if form.vars.value.ImageGuide %}
+        <img src="{{ asset('/images/' ~ form.vars.value.ImageGuide) }}" alt="Current Image" style="max-width: 200px; max-height: 200px;">
+    {% endif %}
+
+    {# Allow uploading a new image #}
+    {{ form_row(form.imageFile) }}
+
+
+
+    <button type="submit">Modifier</button>
+    
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,14 @@
+.date-dropdowns {
+    box-sizing: border-box;
+    text-align: center;
+	display: flex;
+	flex-direction: row;
+	margin-left: -2px;
+	margin-right: -2px;
+}
+.date-dropdowns select {
+	padding-left: .4em;
+	padding-right: 0;
+	flex: 1 1 33%;
+	margin: 0 2px;
+}

@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Reservation{% endblock %}
+
+{% block body %}
+
+ <br><br><br><br><br>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 20px;
+}
+
+
+h1 {
+    text-align: center;
+    color: #0056b3;
+    font-size: 2.5rem; /* Augmente la taille de la police pour rendre le titre plus imposant */
+    font-weight: bold; /* Rend le texte plus épais pour plus de visibilité */
+    margin-top: 0.5em; /* Réduit l'espace au-dessus du titre pour un meilleur équilibrage */
+    margin-bottom: 1em; /* Augmente l'espace en dessous du titre pour une séparation claire avec le contenu suivant */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile pour un effet de profondeur */
+    transition: transform 0.3s ease, text-shadow 0.3s ease; /* Transition pour les effets interactifs */
+}
+
+h1:hover {
+    transform: scale(1.05); /* Légèrement agrandi au survol pour un effet interactif */
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3); /* Ombre plus prononcée au survol pour un effet de profondeur accru */
+}
+
+
+.form-wrapper {
+    background-color: #fff;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: .5rem;
+    color: #666;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 6px;
+    box-sizing: border-box;
+}
+
+button, .form-link {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+button:hover,
+.form-link:hover {
+    background-color: #0056b3;
+}
+
+.form-link {
+    background-color: #6c757d; /* Different background color for 'back to list' */
+}
+
+.form-link:hover {
+    background-color: #565e64;
+}
+
+
+</style>
+
+
+    <div class="form-wrapper">
+    <h1>Create new Reservation</h1>
+    <div classe="formulaire">
+        {{ include('reservation/_form.html.twig') }}
+    </div>
+    <a href="{{ path('listeFront') }}" class="form-link">back to list</a>
+</div>
+{% endblock %}
