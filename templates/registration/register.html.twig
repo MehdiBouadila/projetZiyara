@@ -1,0 +1,79 @@
+
+{% block stylesheets %}
+    <style>
+        /* Add your custom CSS styles for the registration form */
+        body {
+            background-image: url('front/images/back.jpg'); /* Specify the path to your background image */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* Adjust the height as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .registration-form {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the form */
+            padding: 20px;
+            border-radius: 20px; /* Make the border radius more round */
+            width: 400px; /* Adjust the width as needed */
+            text-align: center;
+        }
+
+        .registration-form input,
+        .registration-form button {
+            margin-bottom: 10px;
+            border-radius: 20px; /* Make the border radius more round */
+        }
+
+        /* Styles for the button */
+        .registration-form button {
+            font-size: 18px; /* Adjust the font size as needed */
+            font-family: Arial, sans-serif; /* Specify the font family */
+            padding: 10px 20px; /* Add padding to make the button larger */
+            border: none; /* Remove default button border */
+            background-color: #007bff; /* Change the background color */
+            color: #fff; /* Change the text color */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
+        }
+
+        .registration-form button:hover {
+            background-color: #0056b3; /* Darken the background color on hover */
+        }
+
+        /* Styles for the labels */
+        .registration-form label {
+            font-size: 16px; /* Adjust the font size as needed */
+            font-weight: bold; /* Make the text bold */
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="registration-form">
+    <h1>Sinscrire</h1>
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    {{ form_start(registrationForm) }}
+        <div>
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-control', 'autocomplete': 'email', 'autofocus': true} }) }}
+        </div>
+        <div>
+            {{ form_label(registrationForm.plainPassword) }}
+            {{ form_widget(registrationForm.plainPassword, { 'attr': {'class': 'form-control', 'autocomplete': 'new-password'} }) }}
+        </div>
+        <div>
+            {{ form_label(registrationForm.agreeTerms) }}
+            {{ form_widget(registrationForm.agreeTerms) }}
+        </div>
+        <button type="submit" class="btn">Créer mon compte</button>
+    {{ form_end(registrationForm) }}
+</div>
+{% endblock %}
+

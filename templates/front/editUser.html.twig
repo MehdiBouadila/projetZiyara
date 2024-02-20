@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier mon compte{% endblock %}
+
+
+
+{% block body %}
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+   
+
+    <h1>Modifier mon compte</h1>
+
+    {{ include('back/user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <div class="mt-3">
+        <a href="{{ path('app_user_show_front', {'id': user.id}) }}" class="btn btn-secondary">Retour aux détails</a>
+
+    </div>
+
+    {{ include('back/user/_delete_form.html.twig') }}
+</div>
+{% endblock %}

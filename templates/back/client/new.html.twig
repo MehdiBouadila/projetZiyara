@@ -1,0 +1,29 @@
+{% extends 'back.html.twig' %}
+
+{% block css %}
+ {{ parent() }} 
+{% endblock %}
+
+
+{% block title %}New Client{% endblock %}
+
+
+{% block navbar %}
+ {{ parent() }} 
+{% endblock %}
+
+{% block body %}
+
+ {{ parent() }}
+ 
+    <h1>Create new Client</h1>
+
+    {{ include('back/client/_form.html.twig') }}
+
+    <div class="mt-3"> <!-- Add margin top for spacing -->
+    <a href="{{ path('app_client_index') }}" class="btn btn-secondary">Back to List</a>
+    </div>
+
+
+
+{% endblock %}

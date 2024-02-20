@@ -34,21 +34,42 @@
 
 			<div class="collapse navbar-collapse" id="ftco-nav">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a href="index.html.twig" class="nav-link">Acceuil</a></li>
+					<li class="nav-item active"><a href="{{ path('app_front') }}" class="nav-link">Acceuil</a></li>
 					<li class="nav-item"><a href="" class="nav-link">Packs</a></li>
 					<li class="nav-item"><a href="" class="nav-link">Guides</a></li>
 					<li class="nav-item"><a href="" class="nav-link">Visites</a></li>
 					<li class="nav-item"><a href="" class="nav-link">Transport</a></li>
 					<li class="nav-item"><a href="" class="nav-link">Boutique</a></li>
+					
+   
+     <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Mon compte
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% if app.user %}
+            <span class="dropdown-item-text">Connecté en tant que: {{ app.user.username }}</span>
+            <div class="dropdown-divider"></div>
+        {% endif %}
+        <a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
+				{% if app.user %}
+    <a class="dropdown-item" href="{{ path('app_user_show_front', {'id': app.user.id}) }}">Détails</a>
+{% endif %}
+
+
+    </div>
+</li>
+
+
+
 				</ul>
 			</div>
 		</div>
 	</nav>
 	<!-- END nav -->
-	{% endblock %}
 	
 
-	{% block body %}
+
 	<div class="hero-wrap js-fullheight" style="background-image: url('front/images/back.jpg');">
 		<div class="overlay"></div>
 		<div class="container">
@@ -62,7 +83,10 @@
 			</div>
 		</div>
 	</div>
+	{% endblock %}
 
+
+{% block body %}
 
 		<section class="ftco-section services-section">
 			<div class="container">

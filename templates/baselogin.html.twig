@@ -1,0 +1,54 @@
+{% block css %}
+    
+    <style>
+        body {
+            background-image: url('front/images/back2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 100vh; /* Ensure the background covers the entire viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-form {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for the form */
+            padding: 20px;
+            border-radius: 40px; /* Make the border radius more round */
+            width: 600px; /* Adjust the width as needed */
+            text-align: center;
+        }
+
+        .login-form input,
+        .login-form button {
+            margin-bottom: 10px;
+            border-radius: 30x;
+        }
+
+        /* Styles for the button */
+        .login-form button {
+            font-size: 20px; /* Increase the font size */
+            font-family: Arial, sans-serif; /* Change the font family */
+            padding: 10px 20px; /* Add padding to make the button larger */
+            border: none; /* Remove default button border */
+            border-radius: 20px; /* Make the border radius more round */
+            background-color: #7988CB; /* Change the background color */
+            color: #fff; /* Change the text color */
+            cursor: pointer; /* Change cursor to pointer on hover */
+            transition: background-color 0.3s ease; /* Add transition for smooth hover effect */
+        }
+
+        .login-form button:hover {
+            background-color: #5C6FAB; /* Darken the background color on hover */
+        }
+
+        /* Styles for the label "Email" and "Mot de passe" */
+        .login-form label {
+            font-size: 24px; /* Increase the font size */
+            font-weight: bold; /* Make the text bold */
+        }
+
+    </style>
+
+{% endblock %}
