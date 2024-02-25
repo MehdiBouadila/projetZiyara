@@ -6,6 +6,12 @@ app_produit_index:
     controller: App\Controller\ProduitController::index
     methods: ['GET']
 
+app_produit_indexfront:
+    path: /produit/listfront
+    controller: App\Controller\ProduitController::indexfront
+    methods: ['GET']
+
+
 app_produit_new:
     path: /produit/new
     controller: App\Controller\ProduitController::new
@@ -14,6 +20,11 @@ app_produit_new:
 app_produit_show:
     path: /produit/{id}
     controller: App\Controller\ProduitController::show
+    methods: ['GET']
+
+app_produitfront_show:
+    path: /produit/showfront/{id}
+    controller: App\Controller\ProduitController::showfront
     methods: ['GET']
 
 app_produit_edit:

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Produit;
 use App\Form\ProduitType;
 use App\Repository\ProduitRepository;
+use App\Repository\CategorieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -24,15 +25,27 @@ class ProduitController extends AbstractController
             'produits' => $produitRepository->findAll(),
         ]);
     }
+    #[Route('/produit/listfront', name: 'app_produit_indexfront', methods: ['GET'])]
+    public function indexfront(ProduitRepository $produitRepository): Response
+    {
+        return $this->render('produit/indexfront.html.twig', [
+            'produits' => $produitRepository->findAll(),
+        ]);
+    }
+    
 
-    #[Route('/new', name: 'app_produit_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger): Response
+    #[Route('/new/{id}', name: 'app_produit_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger,CategorieRepository $repo): Response
     {
         $produit = new Produit();
         $form = $this->createForm(ProduitType::class, $produit);
         $form->handleRequest($request);
 
+         $idFromUrl = $request->query->get('id');
+         $categorie=$repo->find($idFromUrl);
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $produit->setCatt($categorie);
             /** @var UploadedFile $imageFile */
                 $imageFile = $form->get('image')->getData();
 
@@ -72,6 +85,13 @@ class ProduitController extends AbstractController
     public function show(Produit $produit): Response
     {
         return $this->render('produit/show.html.twig', [
+            'produit' => $produit,
+        ]);
+    }
+    #[Route('produit/showfront/{id}', name: 'app_produitfront_show', methods: ['GET'])]
+    public function showfront(Produit $produit): Response
+    {
+        return $this->render('produit/showfront.html.twig', [
             'produit' => $produit,
         ]);
     }

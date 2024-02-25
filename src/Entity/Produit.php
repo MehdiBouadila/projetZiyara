@@ -5,7 +5,7 @@ use App\Entity\Categorie;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
-
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\File;
 
 
@@ -20,21 +20,26 @@ class Produit
     private ?int $id = null;
 
     #[ORM\Column(length: 60)]
+    #[Assert\NotBlank(message:"please enter a name")]
+    #[Asser\Regex(pattern: '/^[a-zA-Z\s]+$/')]
     private ?string $nom = null;
 
     #[ORM\Column(length: 255)]
+   
     private ?string $image = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"please enter a quantity")]
     private ?int $quantite = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"please enter a price")]
+    #[Assert\GreaterThanOrEqual(value: 0, message:"price cannot be negative")]
     private ?int$prix = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $cat = null;
 
     #[ORM\ManyToOne(inversedBy: 'tab')]
+    #[ORM\JoinColumn(name: 'catt_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private ?Categorie $catt = null;
 
 
@@ -92,17 +97,6 @@ class Produit
         return $this;
     }
 
-    public function getCat(): ?string
-    {
-        return $this->cat;
-    }
-
-    public function setCat(string $cat): static
-    {
-        $this->cat = $cat;
-
-        return $this;
-    }
 
     public function getCatt(): ?Categorie
     {

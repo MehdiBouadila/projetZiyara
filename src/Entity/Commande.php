@@ -14,6 +14,8 @@ class Commande
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Asser\NotNull]
+    #[Assert\GreaterThan(value: 'today')]
     private ?\DateTime $date = null;
 
     #[ORM\Column(length: 255)]

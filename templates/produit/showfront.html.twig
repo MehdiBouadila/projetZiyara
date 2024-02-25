@@ -1,0 +1,47 @@
+
+{% extends 'base.html.twig' %}
+{% block css %}
+{{ parent() }}
+{% endblock %}
+
+{% block title %}Produit show{% endblock %}
+{% block navbar %}
+{{ parent() }}
+{% endblock %}
+  
+{% block body %}
+{{ parent() }}
+    <h1>Produit</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produit.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ produit.nom }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ asset('uploads/'~ produit.image) }}"></td>
+            </tr>
+            <tr>
+                <th>Quantite</th>
+                <td>{{ produit.quantite }}</td>
+            </tr>
+            <tr>
+                <th>Prix</th>
+                <td>{{ produit.prix }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-inverse-primary btn-fw" href="{{ path('app_produit_indexfront') }}">back to list<i class="mdi mdi-reply"></i></a>
+
+    <a class="btn btn-inverse-info btn-fw">Ajouter au panier <i class="mdi mdi-border-color"></i> </a>
+
+   
+{% endblock %}
+
