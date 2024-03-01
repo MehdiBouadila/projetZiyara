@@ -42,8 +42,8 @@ class Produit
     #[ORM\JoinColumn(name: 'catt_id', referencedColumnName: 'id', onDelete: 'CASCADE')]
     private ?Categorie $catt = null;
 
+  
 
-    
     public function getId(): ?int
     {
         return $this->id;

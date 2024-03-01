@@ -22,6 +22,7 @@ class CategorieType extends AbstractType
                     'Decoration' => 'decoration',
                     'Vêtements' => 'vêtements',
                     'Epices' => 'epices',
+                    'Tapis' => 'tapis',
                 ],
                 'placeholder' => 'Choisir les types',
                 'required' => false,

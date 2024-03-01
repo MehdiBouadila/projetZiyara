@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block css %}
+{{ parent() }}
+{%endblock%}
+
+{% block title %}ID user{% endblock %}
+{% block navbar %}
+{{ parent() }}
+{%endblock%}
+
+{% block body %}
+{{ parent() }}
+<h1>Entrez votre ID</h1>
+
+<form action="{{ path('handle_id') }}" method="POST">
+        <label for="id">Enter ID:</label>
+        <input type="text" id="id" name="id">
+        <button type="submit">Submit</button>
+    </form>
+
+
+
+{% endblock %}
+

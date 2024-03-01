@@ -10,6 +10,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\Produit;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\ProduitRepository;
+use App\Form\ProduitType;
+
 
 #[Route('/commande')]
 class CommandeController extends AbstractController
@@ -22,25 +27,54 @@ class CommandeController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_commande_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $commande = new Commande();
-        $form = $this->createForm(CommandeType::class, $commande);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($commande);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('commande/new.html.twig', [
-            'commande' => $commande,
-            'form' => $form,
-        ]);
+#[Route('/new', name: 'app_commande_new', methods: ['GET', 'POST'])]
+public function new( Request $request, SessionInterface $session, EntityManagerInterface $entityManager, ProduitRepository $produitRepository): Response
+{
+    // Create a new Commande entity
+    $commande = new Commande();
+    
+    // Assuming Commande entity properties are set accordingly, adjust this part as needed
+    $commande->setDate(new \DateTime()); // Set the date to the current date/time
+    $commande->setStatut('En attente');
+   
+    $totalc = $request->query->get('total');
+    $commande->setTotal((float)$totalc);
+ // Set the default payment type
+    
+    // Fetch products from the database based on the IDs in the session (if applicable)
+    // Example:
+    $panier = $session->get('panier', []);
+     foreach($panier as $itemId => $quantite) {
+       $produit = $produitRepository->find($itemId);
+         if($produit) {
+            $commande->addPanier($produit);
+       }
     }
+    
+    // Create the form for the Commande entity
+    $form = $this->createForm(CommandeType::class, $commande);
+    $form->handleRequest($request);
+
+    // Handle form submission
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Persist the Commande entity
+        $entityManager->persist($commande);
+        $entityManager->flush();
+
+        // Redirect to the index page or another appropriate route
+        return $this->redirectToRoute('app_produit_indexfront');
+    }
+
+    // Render the form template
+    return $this->render('commande/new.html.twig', [
+        'commande' => $commande,
+        'form' => $form->createView(),
+    ]);
+}
+
+
+        
 
     #[Route('/{id}', name: 'app_commande_show', methods: ['GET'])]
     public function show(Commande $commande): Response
@@ -78,4 +112,7 @@ class CommandeController extends AbstractController
 
         return $this->redirectToRoute('app_commande_index', [], Response::HTTP_SEE_OTHER);
     }
+
+  
+
 }

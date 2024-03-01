@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block title %}Panier{% endblock %}
+
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <main class="container">
+        <section class="row">
+            <div class="col-12">
+                <h1>Panier</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Prix</th>
+                            <th>Quantité</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for element in data %}
+                        {% set totalp = element.produit.prix %}
+                        
+                            <tr>
+                                <td>{{ element.produit.nom }}</td>
+                                <td id="price_{{ element.produit.id }}">{{ element.produit.prix }} TND</td>
+                                <td>
+                                
+                                    <input type="number" id="quantity_{{ element.produit.id }}" name="quantity_{{ element.produit.id }}" value="1" min="1">
+                                </td>
+                                <td id="totalp_{{ element.produit.id }}">{{ totalp }} TND</td>
+                                <td>
+                                    <!-- You can add action buttons here -->
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="5">Votre panier est vide</td>
+                            </tr>    
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Total</td>
+                            <td id="cart-total">{{ total }} TND</td>
+
+                            <td>
+                                <!-- You can add action buttons here -->
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                 <a href="{{ path('app_commande_new') }}?total={{ total }}"  class="btn btn-primary">Valider Panier</a>
+            </div>
+        </section>
+    </main>
+
+   <script>
+        // Update total for each product and cart total when quantity changes
+        document.querySelectorAll('[id^="quantity_"]').forEach(function(element) {
+            element.addEventListener('change', function() {
+                var id = this.id.split('_')[1];
+                var quantity = parseInt(this.value);
+                var price = parseFloat(document.getElementById('price_' + id).textContent.split('_')[0]);
+                var totalp= price * quantity;
+
+                document.getElementById('totalp_'+ id).textContent = totalp.toFixed(2) + ' TND';
+
+                var total = 0;
+                document.querySelectorAll('[id^="totalp_"]').forEach(function(totalElement) {
+                    total += parseFloat(totalElement.textContent.split(' ')[0]);
+                });
+                document.getElementById('cart-total').textContent = total.toFixed(2) + ' TND';
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,4 +1,33 @@
+{# templates/form/commande_form.html.twig #}
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-inverse-success btn-fw">{{ button_label|default('Save') }}<i class="mdi mdi-plus-circle"></i> </button>
+<div class="row no-gutters">
+    <div class="col-md d-flex">
+        <div class="form-group p-4 border-0">
+            {{ form_label(form.iduser, 'ID User') }}
+            <div class="form-field">
+                <div class="icon"><span class="fa fa-search"></span></div>
+                {{ form_widget(form.iduser, {'attr': {'class': 'form-control', 'placeholder': 'ID User'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md d-flex">
+        <div class="form-group p-4">
+            {{ form_label(form.type_paiement, 'Type Paiement') }}
+            <div class="form-field">
+                <div class="select-wrap">
+                    <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                    {{ form_widget(form.type_paiement, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md d-flex">
+        <div class="form-group d-flex w-100 border-0">
+            <div class="form-field w-100 align-items-center d-flex">
+                <input type="submit" value="{{ button_label|default('Passer Commande') }}" class="align-self-stretch form-control btn btn-primary">
+            </div>
+        </div>
+    </div>
+</div>
 {{ form_end(form) }}

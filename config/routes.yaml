@@ -112,3 +112,13 @@ app_commande_delete:
     path: /commande/{id}
     controller: App\Controller\CommandeController::delete
     methods: ['POST']
+
+app_panier_index:
+    path: '/panier/index'
+    controller: App\Controller\PanierController::index
+    methods: ['GET']
+
+app_panier_add:
+    path: '/add/{id}'
+    controller: App\Controller\PanierController::addproduit
+    methods: ['GET']

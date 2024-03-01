@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
@@ -26,6 +28,17 @@ class Commande
 
     #[ORM\Column(length: 255)]
     private ?string $type_paiement = null;
+
+    #[ORM\ManyToMany(targetEntity: Produit::class)]
+    private Collection $panier;
+
+    #[ORM\Column(length: 255)]
+    private ?string $iduser = null;
+
+    public function __construct()
+    {
+        $this->panier = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,6 +89,44 @@ class Commande
     public function setTypePaiement(string $type_paiement): static
     {
         $this->type_paiement = $type_paiement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getPanier(): Collection
+    {
+        return $this->panier;
+    }
+
+    public function addPanier(Produit $panier): static
+    {
+        if (!$this->panier->contains($panier)) {
+            $this->panier->add($panier);
+        }
+
+        return $this;
+    }
+
+    
+    public function removePanier(Produit $panier): static
+    {
+        $this->panier->removeElement($panier);
+
+        return $this;
+    }
+    
+
+    public function getIduser(): ?string
+    {
+        return $this->iduser;
+    }
+
+    public function setIduser(string $iduser): static
+    {
+        $this->iduser = $iduser;
 
         return $this;
     }

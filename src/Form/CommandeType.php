@@ -13,20 +13,18 @@ class CommandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('date')
-            ->add('statut', ChoiceType::class, [
+           
+            ->add('iduser')
+            ->add('type_paiement', ChoiceType::class, [
                 'multiple' => false, 
                 'expanded' => false,
                 'choices' => [
-                    'En cours' => 'en cours',
-                    'En attente' => 'en attente',
-                    'Terminee' => 'terminee',
+                    'carte' => 'carte',
+                    'liquide' => 'liquide',
                 ],
                 'placeholder' => 'Choisir les types',
                 'required' => false,
             ])
-            ->add('total')
-            ->add('type_paiement')
         ;
     }
 

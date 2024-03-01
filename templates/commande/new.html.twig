@@ -1,4 +1,4 @@
-{% extends 'back.html.twig' %}
+{% extends 'base.html.twig' %}
 {% block css %}
 {{ parent() }}
 {%endblock%}
@@ -14,5 +14,4 @@
 
     {{ include('commande/_form.html.twig') }}
 
-    <a class="btn btn-inverse-primary btn-fw" href="{{ path('app_commande_index') }}">back to list<i class="mdi mdi-reply"></i></a>
 {% endblock %}
