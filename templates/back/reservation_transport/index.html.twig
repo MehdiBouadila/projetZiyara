@@ -1,0 +1,48 @@
+{% extends 'back.html.twig' %}
+
+{% block css %}
+ {{ parent() }} 
+{% endblock %}
+
+{% block title %}ReservationTransport {% endblock %}
+
+{% block body %}
+{{ parent() }}
+    <h1>ReservationTransport </h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdUser</th>
+                <th>IdTransport</th>
+                <th>DateReservationTransport</th>
+                <th>PointDepart</th>
+                <th>PointArrive</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation_transport in reservation_transports %}
+            <tr>
+                <td>{{ reservation_transport.id }}</td>
+                <td>{{ reservation_transport.idUser.id }}</td>
+                <td>{{ reservation_transport.idTransport }}</td>
+                <td>{{ reservation_transport.dateReservationTransport ? reservation_transport.dateReservationTransport|date('Y-m-d') : '' }}</td>
+                <td>{{ reservation_transport.pointDepart }}</td>
+                <td>{{ reservation_transport.pointArrive }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_transport_show', {'id': reservation_transport.id}) }} "class="btn btn-info">Show</a>
+                    <a href="{{ path('app_reservation_transport_edit', {'id': reservation_transport.id}) }}" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_transport_new') }}"class="btn btn-success">Create new</a>
+{% endblock %}

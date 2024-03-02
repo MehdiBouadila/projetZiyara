@@ -1,0 +1,180 @@
+{% extends 'destination.html.twig' %}
+
+{% block title %}
+    Transport
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+      <style>
+        .sorting-options {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+
+        .sorting-options li {
+            margin-right: 10px;
+        }
+
+        .sorting-options li a {
+            color: #333;
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            transition: background-color 0.3s ease;
+        }
+
+        .sorting-options li a:hover {
+            background-color: #e9ecef;
+        }
+    </style>
+{% endblock %}
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/front/images/bg_1.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center" data-scrollax-parent="true">
+            <div class="col-md-9 ftco-animate pb-5 text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html"> <i class="fa fa-chevron-right"></i></a></span> <span> <i class="fa fa-chevron-right"></i></span></p>
+                <h1 class="mb-0 bread">Transport Liste</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="ftco-section ftco-no-pb search-section" style="margin-bottom: 30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="search-wrap-1 ftco-animate">
+                    <h3>Trier par :</h3>
+                    <ul class="sorting-options">
+                        <li><a href="{{ path('order_by_type')}}">Type</a></li>
+                        <li><a href="{{ path('order_by_date')}}">Date</a></li>
+                        <li><a href="{{ path('order_by_prix')}}">Prix</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="search-wrap-1 ftco-animate">
+          <form action="#" class="search-property-1">
+            <div class="row no-gutters">
+              <div class="col-lg d-flex">
+                <div class="form-group p-4 border-0">
+                  <label for="#">Destination</label>
+                  <div class="form-field">
+                    <div class="icon"><span class="fa fa-search"></span></div>
+                    <input type="text" class="form-control" placeholder="Search place">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg d-flex">
+                <div class="form-group p-4">
+                  <label for="#">Date</label>
+                  <div class="form-field">
+                    <div class="icon"><span class="fa fa-calendar"></span></div>
+                    <input type="text" class="form-control checkin_date" placeholder="Date">
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg d-flex">
+                <div class="form-group p-4">
+                  <label for="#">Category</label>
+                  <div class="form-field">
+                    <div class="icon"><span class="fa fa-calendar"></span></div>
+                    <select class="form-control" name="categorie">
+                      <option value="option1">Option 1</option>
+                      <option value="option2">Option 2</option>
+                      <option value="option3">Option 3</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg d-flex">
+                <div class="form-group p-4">
+                  <label for="#">Price Limit</label>
+                  <div class="form-field">
+                    <div class="select-wrap">
+                      <div class="icon"><span class="fa fa-chevron-down"></span></div>
+                      <select name="" id="" class="form-control">
+                        <option value="">$5,000</option>
+                        <option value="">$10,000</option>
+                        <option value="">$50,000</option>
+                        <option value="">$100,000</option>
+                        <option value="">$200,000</option>
+                        <option value="">$300,000</option>
+                        <option value="">$400,000</option>
+                        <option value="">$500,000</option>
+                        <option value="">$600,000</option>
+                        <option value="">$700,000</option>
+                        <option value="">$800,000</option>
+                        <option value="">$900,000</option>
+                        <option value="">$1,000,000</option>
+                        <option value="">$2,000,000</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg d-flex">
+                <div class="form-group d-flex w-100 border-0">
+                  <div class="form-field w-100 align-items-center d-flex">
+                    <input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section ftco-no-pb transports-section">
+  <div class="container">
+    <div class="row">
+     {% for transport in transports %}
+     {% if transport.imageTransport is defined %}
+    <div class="col-md-4 ftco-animate">
+        <div class="project-wrap">
+            <a href="#" class="img" style="background-image: url('{{ asset('uploads/' ~ transport.imageTransport) }}');">
+                <span class="price">${{ transport.prixTransport }}/person</span>
+            </a>
+            <div class="text p-4">
+                <span class="days">{{ transport.typeTransport }} </span>
+                <h3><a href="#">{{ transport.dateTransport ? transport.dateTransport|date('Y-m-d') : '' }}</a></h3>
+                <a href="{{ path('app_reservation_transport_new_front', {'id': transport.id}) }}" class="btn btn-primary">Réserver</a>
+                <a href="{{ path('app_transport_show_front', {'id': transport.id}) }}" class="btn btn-info">Show</a>
+            </div>
+            
+        </div>
+    </div>
+     {% endif %}
+   {% endfor %}
+    </div>
+  </div>
+</section>
+<div style="margin-bottom: 100px;"></div>
+{% endblock %}
+

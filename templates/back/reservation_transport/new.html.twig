@@ -1,0 +1,20 @@
+{% extends 'back.html.twig' %}
+
+{% block css %}
+ {{ parent() }} 
+{% endblock %}
+
+{% block title %}New ReservationTransport{% endblock %}
+
+{% block navbar %}
+{{ parent() }}
+{% endblock %}
+
+{% block body %}
+{{ parent() }}
+    <h1>Create new ReservationTransport</h1>
+
+    {{ include('back/reservation_transport/_form.html.twig') }}
+
+    <a href="{{ path('app_reservation_transport_index') }}"class="btn btn-primary">back to list</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'back.html.twig' %}
+
+{% block css %}
+ {{ parent() }} 
+{% endblock %}
+
+{% block title %}New Transport{% endblock %}
+
+{% block navbar %}
+{{ parent() }}
+{% endblock %} 
+
+{% block body %}
+{{ parent() }}
+    <h1>Create new Transport</h1>
+
+    {{ include('back/transport/_form.html.twig') }}
+
+    <a href="{{ path('app_transport_index') }} "class="btn btn-primary">back to list</a>
+{% endblock %}

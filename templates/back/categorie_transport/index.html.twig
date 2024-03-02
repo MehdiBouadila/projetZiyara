@@ -1,0 +1,40 @@
+{% extends 'back.html.twig' %}
+
+{% block css %}
+    {{ parent() }} 
+{% endblock %}
+
+{% block title %}CategorieTransport{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>CategorieTransport</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>NomCategorieTransport</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categorie_transport in categorie_transports %}
+            <tr>
+                <td>{{ categorie_transport.id }}</td>
+                <td>{{ categorie_transport.nomCategorieTransport }}</td>
+                <td>
+                    <a href="{{ path('app_categorie_transport_show', {'id': categorie_transport.id}) }}" class="btn btn-info">Show</a>
+                    <a href="{{ path('app_categorie_transport_edit', {'id': categorie_transport.id}) }}" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_categorie_transport_new') }}" class="btn btn-success">Create New</a>
+{% endblock %}

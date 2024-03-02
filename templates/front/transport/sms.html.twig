@@ -1,0 +1,47 @@
+{% extends 'destination.html.twig' %}
+
+{% block title %}
+    Envoyer un SMS
+{% endblock %}
+
+{% block body %}
+    <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/front/images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center" data-scrollax-parent="true">
+                <div class="col-md-9 ftco-animate pb-5 text-center">
+                    <p class="breadcrumbs"><span class="mr-2"><a href="index.html"> <i class="fa fa-chevron-right"></i></a></span> <span> <i class="fa fa-chevron-right"></i></span></p>
+                    <h1 class="mb-0 bread">Envoyer un SMS</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <form method="post" action="{{ path('send_sms') }}">
+                            <div class="form-group">
+                                <label for="number">Numéro de téléphone :</label>
+                                <input type="text" name="number" id="number" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-3">Envoyer le SMS</button>
+                        </form>
+                    </div>
+                </div>
+                {% if smsSent %}
+                    <div class="alert alert-success mt-3 text-center">Le SMS a été envoyé avec succès.</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <script>
+        // Set timeout for redirection (in milliseconds)
+        setTimeout(function() {
+            // Redirect to the main page
+            window.location.href = "{{ path('app_transport_index_f') }}";
+        }, 7000); // 
+    </script>
+{% endblock %}

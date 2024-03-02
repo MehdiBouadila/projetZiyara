@@ -1,0 +1,38 @@
+{% extends 'back.html.twig' %}
+
+{% block css %}
+ {{ parent() }} 
+{% endblock %}
+
+{% block title %}CategorieTransport{% endblock %}
+
+{% block body %}
+
+{{ parent() }}
+    <h1>CategorieTransport</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie_transport.id }}</td>
+            </tr>
+            <tr>
+                <th>NomCategorieTransport</th>
+                <td>{{ categorie_transport.nomCategorieTransport }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+
+  
+<a href="{{ path('app_categorie_transport_index') }}" class="btn btn-primary">Back to List</a>
+   <a href="{{ path('app_categorie_transport_edit', {'id': categorie_transport.id}) }}" class="btn btn-info">edit</a>
+
+
+    {{ include('/back/categorie_transport/_delete_form.html.twig') }}
+
+
+
+{% endblock %}

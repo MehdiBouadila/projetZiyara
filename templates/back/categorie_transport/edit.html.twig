@@ -1,0 +1,18 @@
+{% extends 'back.html.twig' %}
+
+{% block css %}
+    {{ parent() }} 
+{% endblock %}
+
+{% block title %}Edit CategorieTransport{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Edit CategorieTransport</h1>
+
+    {{ include('back/categorie_transport/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_categorie_transport_index') }}" class="btn btn-primary">back to list</a>
+
+    {{ include('/back/categorie_transport/_delete_form.html.twig') }}
+{% endblock %}

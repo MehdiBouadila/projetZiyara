@@ -1,0 +1,48 @@
+{% extends 'back.html.twig' %}
+
+{% block css %}
+    {{ parent() }} 
+{% endblock %}
+
+{% block title %}Transport{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+    <h1>Transport</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ImageTransport</th>
+                <th>TypeTransport</th>
+                <th>DateTransport</th>
+                <th>PrixTransport</th>
+                <th>Description</th> 
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transport in transports %}
+            <tr>
+                <td>{{ transport.id }}</td>
+                <td>{{ transport.imageTransport }}</td>
+                <td>{{ transport.typeTransport }}</td>
+                <td>{{ transport.dateTransport ? transport.dateTransport|date('Y-m-d') : '' }}</td>
+                <td>{{ transport.prixTransport }}</td>
+                <td>{{ transport.description }}</td> 
+                <td>
+                    <a href="{{ path('app_transport_show', {'id': transport.id}) }}" class="btn btn-info">Show</a>
+                    <a href="{{ path('app_transport_edit', {'id': transport.id}) }}" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">No records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_transport_new') }}" class="btn btn-success">Create new</a>
+{% endblock %}
