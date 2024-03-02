@@ -53,8 +53,8 @@
         {% endif %}
         <a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a>
 				{% if app.user %}
-    <a class="dropdown-item" href="{{ path('app_user_show_front', {'id': app.user.id}) }}">Détails</a>
-{% endif %}
+        <a class="dropdown-item" href="{{ path('app_user_show_front', {'id': app.user.id}) }}">Détails</a>
+         {% endif %}
 
 
     </div>

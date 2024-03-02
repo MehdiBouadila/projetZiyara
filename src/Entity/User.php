@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Email;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
@@ -19,7 +20,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: "tapez le mail")]
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Regex(
+        pattern: '/^[^\s@]+@[^\s@]+\.[^\s@]+$/',
+        message: "L'adresse email '{{ value }}' n'est pas valide."
+    )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -28,11 +34,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank(message: "tapez le mot de passe")]
+    #[Assert\Regex(
+    pattern: '/^(?=.*[A-Z])(?=.*\d).+$/',
+    message: "Le mot de passe doit contenir au moins une majuscule et au moins un chiffre"
+    )]
     #[ORM\Column]
     private ?string $password = null;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $googleId = null;
+
+
 
     public function getId(): ?int
     {
@@ -131,6 +147,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getGoogleId(): ?string
+    {
+        return $this->googleId;
+    }
+
+    public function setGoogleId(?string $googleId): static
+    {
+        $this->googleId = $googleId;
 
         return $this;
     }

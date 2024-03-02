@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -124,6 +126,26 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    
+    #[Route('/search', name: 'search_users', methods: ['GET'])]
+    public function search(Request $request, SerializerInterface $serializer, UserRepository $userRepository): JsonResponse
+    {
+        try {
+            $query = $request->query->get('q');
+    
+            // Perform database search based on the query
+            $users = $userRepository->searchUsers($query);
+    
+            // Serialize the $users array into JSON format
+            $jsonData = $serializer->serialize($users, 'json');
+    
+            return new JsonResponse($jsonData, 200, [], true);
+        } catch (\Exception $e) {
+            // Handle any exceptions
+            return new JsonResponse(['error' => $e->getMessage()], 500);
+        }
     }
 }
  

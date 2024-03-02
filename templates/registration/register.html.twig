@@ -63,16 +63,21 @@
         <div>
             {{ form_label(registrationForm.email) }}
             {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-control', 'autocomplete': 'email', 'autofocus': true} }) }}
+            {{ form_errors(registrationForm.email) }}
         </div>
         <div>
             {{ form_label(registrationForm.plainPassword) }}
             {{ form_widget(registrationForm.plainPassword, { 'attr': {'class': 'form-control', 'autocomplete': 'new-password'} }) }}
+             {{ form_errors(registrationForm.plainPassword) }}
         </div>
         <div>
             {{ form_label(registrationForm.agreeTerms) }}
             {{ form_widget(registrationForm.agreeTerms) }}
         </div>
         <button type="submit" class="btn">Créer mon compte</button>
+         <div>
+     <a href="{{ path('connect_google_start') }}" class="btn btn-lg btn-primary">Se connecter avec mon compte google</a>
+    </div>
     {{ form_end(registrationForm) }}
 </div>
 {% endblock %}
