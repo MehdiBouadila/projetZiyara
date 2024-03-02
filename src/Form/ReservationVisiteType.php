@@ -12,18 +12,45 @@ class ReservationVisiteType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('dateReservationVisite', null, [
-                'attr' => ['class' => 'date-control'],
-                'label_attr' => ['class' => 'date-label'] // Custom class for the label
-            ])
-            ->add('nbrparticipantVisite', null, [
-                'attr' => ['class' => 'form-control'],
-                'label_attr' => ['class' => 'form-label'] // Custom class for the label
-            ])
-            ->add('idVisite', null, [
-                'attr' => ['class' => 'form-control'],
-                'label_attr' => ['class' => 'form-label'] // Custom class for the label
-            ]);
+    ->add('dateReservationVisite', null, [
+        'attr' => ['class' => 'date-control'],
+        'label_attr' => ['class' => 'date-label'] // Custom class for the label
+    ])
+    ->add('nbrparticipantVisite', null, [
+        'attr' => ['class' => 'form-control'],
+        'label_attr' => ['class' => 'form-label'] // Custom class for the label
+    ])
+    ->add('idVisite', null, [
+        'attr' => ['class' => 'form-control'],
+        'label_attr' => ['class' => 'form-label'] // Custom class for the label
+    ])
+    ->add('nom', null, [
+        'attr' => ['class' => 'form-control'],
+        'label_attr' => ['class' => 'form-label'] // Custom class for the label
+    ])
+    ->add('prenom', null, [
+        'attr' => ['class' => 'form-control'],
+        'label_attr' => ['class' => 'form-label'] // Custom class for the label
+    ])
+    ->add('numtlph', null, [
+        'attr' => ['class' => 'form-control'],
+        'label_attr' => ['class' => 'form-label'] // Custom class for the label
+    ])
+    ->add('email', null, [
+        'attr' => ['class' => 'form-control'],
+        'label_attr' => ['class' => 'form-label'] // Custom class for the label
+    ]);
+
+
+
+            
+
+           
+            
+
+            
+            
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

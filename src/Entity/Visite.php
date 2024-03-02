@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VisiteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -43,6 +45,18 @@ class Visite
     #[Assert\Length(max: 255)]
     #[Assert\File(maxSize: "10M")]
     private ?string $imagev = null;
+
+    #[ORM\OneToMany(targetEntity: Favoris::class, mappedBy: 'idVisite')]
+    private Collection $favoris;
+
+    public function __construct()
+    {
+        $this->favoris = new ArrayCollection();
+    }
+
+   
+
+
 
     public function getId(): ?int
     {
@@ -124,4 +138,37 @@ class Visite
     {
         return $this->titre;
     }
+
+    /**
+     * @return Collection<int, Favoris>
+     */
+    public function getFavoris(): Collection
+    {
+        return $this->favoris;
+    }
+
+    public function addFavori(Favoris $favori): static
+    {
+        if (!$this->favoris->contains($favori)) {
+            $this->favoris->add($favori);
+            $favori->setIdVisite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFavori(Favoris $favori): static
+    {
+        if ($this->favoris->removeElement($favori)) {
+            // set the owning side to null (unless already changed)
+            if ($favori->getIdVisite() === $this) {
+                $favori->setIdVisite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+
 }

@@ -1,0 +1,173 @@
+{% extends 'destination.html.twig' %}
+
+{% block title %}
+    Reservation
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+ 
+    <style>
+
+    
+        /* Add your custom CSS here */
+        .container {
+            margin-bottom: 64px;
+            text-align: center;
+            width:70%;
+        }
+
+        .image-container {
+            margin-bottom: 20px;
+        }
+
+        .visite-image {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            border: none; /* Make the table borderless */
+        }
+
+        .details-table td, .details-table th {
+            padding: 10px;
+            text-align: left; /* Align text to the left */
+        }
+
+        .details-table th {
+            background-color: #f2f2f2;
+        }
+
+        .details-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .details {
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 20px;
+            color: #000;
+            margin-bottom: 10px;
+        }
+
+        .description {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .price-value {
+            font-size: 20px;
+            color: #000;
+            text-align: right;
+        }
+        .fancy-date {
+        font-family: 'Arial Black', sans-serif; /* Use a decorative font */
+        font-size: 24px;
+        color: #ffffff; /* White text color */
+        background-color: #4B49AC; /* Purple background color */
+        padding: 5px 10px; /* Add padding for better visual appearance */
+        border-radius: 10px; /* Rounded corners */
+        display: inline-block; /* Ensure the date is displayed inline */
+        margin-bottom: 10px; /* Add spacing below the date */
+    }
+.fancy-price {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Use a modern sans-serif font */
+        font-size: 20px;
+        font-weight: bold;
+        color: #4B49AC; /* Purple text color */
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+        padding: 5px 10px; /* Add padding for better visual appearance */
+        border-radius: 10px; /* Rounded corners */
+        display: inline-block; /* Ensure the price is displayed inline */
+        margin-bottom: 10px; /* Add spacing below the price */
+    }
+   
+    </style>
+{% endblock %}
+
+
+{% block js %}
+    {{ parent() }}
+{% endblock %}
+
+{% block navbar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/front/images/back.jpg');">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+            <div class="col-md-9 ftco-animate pb-5 text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html"> <i class="fa fa-chevron-right"></i></a></span> <span> <i class="fa fa-chevron-right"></i></span></p>
+                <h1 class="mb-0 bread">Confirmation Reservation Visite</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <div>
+            <table class="details-table">
+            <td colspan=2>
+            <div class="image-container">
+                {% if visite.imagev %}
+                    <img class="visite-image" src="{{ asset('uploads/' ~ visite.imagev) }}" alt="imagev">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </div>
+            </td>
+            <div class="details-container">
+         
+                    <tr>
+                        <th colspan="2">Visite Details</th>
+                    </tr>
+                    <tr>
+                        <td class="title">
+                        <h2>Titre:</h2>
+                        <h6>  {{ visite.titre }} </h6><br>
+                         <h2> Description: </h2>
+                         <h6> {{ visite.descriptionVisite }} </h6> <br>
+                        <h2> Date: </h2>
+                       <h6 class="fancy-date">{{ visite.dateVisite ? visite.dateVisite|date('d-m-Y') : '' }}</h6><br>
+                        </td>
+                    
+                    <tr class="title">
+                     <td class="title">
+                    <h2> Prix: </h2>
+                       <h6 class="fancy-date">{{ visite.prix }} dt</h6><br>
+                     </td>
+                    </tr>
+                    </tr>
+                    <tr>
+                        
+                    </tr>
+                </table>
+                 <a href="{{ path('app_reservation_visite_new_front') }}" class="btn btn-primary btn-lg">Reserver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -6,10 +6,12 @@ use App\Entity\ReservationVisite;
 use App\Form\ReservationVisiteType;
 use App\Repository\ReservationVisiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Psr\Log\LoggerInterface;
 
 #[Route('/reservation/visite')]
 class ReservationVisiteController extends AbstractController
@@ -33,7 +35,7 @@ class ReservationVisiteController extends AbstractController
             $entityManager->persist($reservationVisite);
             $entityManager->flush();
 
-            /*$this->addFlash('success', 'Reservation added successfully!');*/
+            
 
             return $this->redirectToRoute('app_visite_index_f');
         }
@@ -42,6 +44,13 @@ class ReservationVisiteController extends AbstractController
             'form' => $form->createView(),
             
         ]);
+    }
+    #[Route('/mesres', name: 'mesres', methods: ['GET', 'POST'])]
+    public function mesres(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        
+
+        return $this->render('front/visite/mesres.html.twig', );
     }
 
     #[Route('/new', name: 'app_reservation_visite_new', methods: ['GET', 'POST'])]
@@ -100,4 +109,32 @@ class ReservationVisiteController extends AbstractController
 
         return $this->redirectToRoute('app_reservation_visite_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
+    
+    #[Route('/load-events', name: 'fc_load_events', methods: ['POST'])]
+    public function loadEvents(Request $request, LoggerInterface $logger): JsonResponse
+    {
+        $logger->info('loadEvents function is being called.');
+        $entityManager = $this->getDoctrine()->getManager();
+    
+        
+        $reservations = $entityManager->getRepository(ReservationVisite::class)->findAll();
+    
+        
+        $events = [];
+        foreach ($reservations as $reservation) {
+            $events[] = [
+                'title' => 'Reservation for ' . $reservation->getIdVisite()->getTitre(),
+                'start' => $reservation->getDateReservationVisite()->format('Y-m-d'),
+                'end' => $reservation->getDateReservationVisite()->format('Y-m-d'),
+                
+            ];
+        }
+    
+        return $this->json($events);
+    }
+
 }
+
+

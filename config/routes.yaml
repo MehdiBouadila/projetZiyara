@@ -5,3 +5,19 @@
 get_image:
     path: '/get-image/{id}'
     controller: App\Controller\VisiteController::getImage
+
+fc_load_events:
+    path: /load-events
+    controller: App\Controller\ReservationVisiteController::loadEvents
+    methods: [POST]
+
+
+create_favorite:
+    path: '/create-favorite'
+    controller: 'App\Controller\VisiteController::createFavorite'
+    methods: ['POST']
+
+remove_favorite:
+    path: '/remove-favorite'
+    controller: 'App\Controller\VisiteController::removeFavorite'
+    methods: ['POST']

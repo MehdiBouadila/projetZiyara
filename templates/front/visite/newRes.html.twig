@@ -158,8 +158,11 @@ body li {
             {# Render the idVisite field as a hidden input field #}
             {{ form_widget(form.idVisite, {'attr': {'hidden': 'hidden'}}) }}
             <br>
-            <button type="submit" class="btn btn-success">{{ button_label|default('Save') }}</button>
+              {{ form_widget(form) }}
+              <button type="submit" class="btn btn-success">{{ button_label|default('Save') }}</button>
             {{ form_end(form) }}
+           
+          
             
             
          

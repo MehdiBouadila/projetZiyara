@@ -1,0 +1,62 @@
+{# templates/booking/calendar.html.twig #}
+{% extends 'destination.html.twig' %}
+
+
+{% block css %}
+  {{ parent() }}
+   <style>
+   .cldnr{
+width:80%;
+
+   }
+   </style>
+{% endblock %}
+{% block js %}
+   {{ parent() }}
+   
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js" integrity="sha256-dHUNnePy81fXq4D/wfu7cPsEIP7zl6MvLb84jtZf+UY=" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            var calendarEl = document.getElementById('calendar-holder');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                defaultView: 'dayGridMonth',
+                editable: false,
+               eventSources: [
+    
+    {
+        url: "{{ path('fc_load_events') }}",
+        method: "POST",
+        extraParams: {
+            filters: JSON.stringify({})
+        },
+        failure: () => {
+            
+        },
+    },
+    
+    
+],
+                headerToolbar: {
+                    start: 'prev,next today',
+                    center: 'title',
+                    end: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                timeZone: 'UTC',
+            });
+
+            
+            calendar.render();
+        });
+    </script>
+{% endblock %}
+{% block body %}
+
+    {{ parent() }}
+    <br>
+     <div class="container">
+    <div class="clndr" id="calendar-holder"></div>
+    <br>
+    </div>
+{% endblock %}

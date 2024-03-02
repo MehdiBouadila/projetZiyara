@@ -3,12 +3,12 @@
 {% block js %}
     {{ parent() }}
     <script>
-        function create_favorite(button) {
-            // Get the visit ID from the button's data attribute
+        function removeFavorite(button) {
+            
             const visitId = button.getAttribute('data-visite-id');
 
-            // Send AJAX request to create a new favorite instance
-            fetch('{{ path('create_favorite') }}', {
+            
+            fetch('{{ path('remove_favorite') }}', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,10 +20,10 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // Handle success
+                    
                     console.log('Favorite added successfully!');
                 } else {
-                    // Handle error
+                    
                     console.error('Failed to add favorite');
                 }
             })
@@ -105,15 +105,18 @@
                                 <h3><a href="#">{{ visite.titre }}</a></h3>
                                 <h5>{{ visite.descriptionVisite }}</h5>
                                 <h6><a href="#">{{ visite.dateVisite ? visite.dateVisite|date('Y-m-d') : 'No Date Available' }}</a></h6>
-                                <form action="{{ path('create_favorite') }}" method="post">
+                                <form action="{{ path('remove_favorite') }}" method="post">
                                     <input type="hidden" name="visitId" value="{{ visite.id }}">
-                                    <button type="submit" class="btn btn-outline-primary">
-                                    <i class="fas fa-heart"></i>
+                                    
+                                    <button type="submit" class="btn btn-outline-primary"  ><i class="fas fa-heart"></i>
+                                    
                                     </button>
                                 </form>
                                 <a href="{{ path('app_show_visite_new_front', {'id': visite.id}) }}" class="btn btn-primary">Voir Details</a>
                             </div>
+
                         </div>
+
                     </div>
                 {% endfor %}
             </div>
